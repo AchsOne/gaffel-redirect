@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>App Weiterleitung</title>
+</head>
+<body>
+<p>Starte App...</p>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const access_token = params.get("access_token");
+    const refresh_token = params.get("refresh_token");
+
+    if (access_token && refresh_token) {
+        // Deep Link zur App aufrufen
+        window.location.href = `gaffelapp://confirm?access_token=${access_token}&refresh_token=${refresh_token}`;
+    } else {
+        document.body.innerHTML = '<h2>Fehler: Ungültiger Link</h2>';
+    }
+</script>
+</body>
+</html>
