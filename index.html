@@ -1,10 +1,16 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weiterleitung zur App…</title>
+</head>
 <body>
   <p>Starte App...</p>
   <script>
-    const currentUrl = window.location.href;
-    document.body.innerHTML += `<p><strong>DEBUG:</strong> ${currentUrl}</p>`;
+    const rawHash = window.location.hash.substring(1); // entferne das '#'
+    document.body.innerHTML += `<p><strong>DEBUG:</strong> ${rawHash}</p>`;
 
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(rawHash);
     const access_token = params.get("access_token");
     const refresh_token = params.get("refresh_token");
     const type = params.get("type");
@@ -20,3 +26,4 @@
     }
   </script>
 </body>
+</html>
