@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <title>Weiterleitung zur App…</title>
-</head>
 <body>
   <p>Starte App...</p>
   <script>
+    const currentUrl = window.location.href;
+    document.body.innerHTML += `<p><strong>DEBUG:</strong> ${currentUrl}</p>`;
+
     const params = new URLSearchParams(window.location.search);
     const access_token = params.get("access_token");
     const refresh_token = params.get("refresh_token");
-    const type = params.get("type"); // signup oder recovery
+    const type = params.get("type");
 
     if (access_token && refresh_token) {
       let target = `gaffelapp://confirm?access_token=${access_token}&refresh_token=${refresh_token}`;
-      if (type === "recovery") {
-        target += `&type=recovery`;
-      } else if (type === "signup") {
-        target += `&type=signup`;
+      if (type) {
+        target += `&type=${type}`;
       }
       window.location.href = target;
     } else {
-      document.body.innerHTML = "<h2>Fehler: Ungültiger Link (fehlende Tokens)</h2>";
+      document.body.innerHTML += "<h2>Fehler: Ungültiger Link (fehlende Tokens)</h2>";
     }
   </script>
 </body>
-</html>
