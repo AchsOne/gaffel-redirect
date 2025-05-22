@@ -7,7 +7,8 @@
 <body>
   <p>Starte App...</p>
   <script>
-    const rawHash = window.location.hash.substring(1); // entferne das '#'
+    const rawQuery = window.location.hash.replace(/^#/, '?');
+window.location.href = `myapp://auth/confirm${rawQuery}`;
     document.body.innerHTML += `<p><strong>DEBUG:</strong> ${rawHash}</p>`;
 
     const params = new URLSearchParams(rawHash);
